@@ -9,9 +9,9 @@ F = diag([1,1,1]); % nx*nx_aug
 ekf_weather;
 err0 = ; %根据实际情况写误差的表达式
 fprintf('Q：%f，R：%f,mean_err(initial)：%f\n',Q(1),R(1),err0);
-step = 1.5;
+step = 1.5; %步长，>1即可，可改
 %% 循环
-for i1 = 1:20
+for i1 = 1:20 %Q调优的总循环次数
     Q = step^i1*Q0;
     R = R0;
     ekf_weather;
@@ -35,7 +35,7 @@ for i1 = 1:20
     end
 end
 %%%%%%%%%%
-for i1 = 1:20
+for i1 = 1:20 %R调优的总循环次数
     Q = Q0;
     R = step^i1*R0;
     ekf_weather;
@@ -58,11 +58,5 @@ for i1 = 1:20
         end
     end
 end
-
-%% wind twice KF
-windx_dynamicukf2 = windekf(1,:)';
-windy_dynamicukf2 = windekf(2,:)';
-windz_dynamicukf2 = windekf(3,:)';
-
 %% end
 clear err0 err
