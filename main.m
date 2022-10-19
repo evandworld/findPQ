@@ -7,7 +7,7 @@ F = diag([1,1,1]); % nx*nx_aug
 
 %% get err initial
 ekf_weather;
-err0 = ; %根据实际情况
+err0 = ; %根据实际情况写误差的表达式
 fprintf('Q：%f，R：%f,mean_err(initial)：%f\n',Q(1),R(1),err0);
 step = 1.5;
 %% 循环
@@ -39,7 +39,7 @@ for i1 = 1:20
     Q = Q0;
     R = step^i1*R0;
     ekf_weather;
-    err = mean((windekf(1,:)'-windx).^2+(windekf(2,:)'-windy).^2+(windekf(3,:)'-windz).^2);
+    err = ; %根据实际情况写误差的表达式
     fprintf('Q：%f，R：%f,mean_err：%f\n',Q(1),R(1),err);
     if err>err0
         if i1==1
@@ -63,7 +63,6 @@ end
 windx_dynamicukf2 = windekf(1,:)';
 windy_dynamicukf2 = windekf(2,:)';
 windz_dynamicukf2 = windekf(3,:)';
-winddynamicukfv_horizon2 = windv_horizontal(windx_dynamicukf2,windy_dynamicukf2);
-winddynamicukfd_horizon2 = windd_horizontal(windx_dynamicukf2,windy_dynamicukf2);
+
 %% end
 clear err0 err
